@@ -9,7 +9,7 @@ v = Voikko("fi")
 
 # Pass the 1st argument as it is the app name itself.
 for a in sys.argv[1:]:
-    print(f'Sanan {a} analyysi:')
+    print('Sanan {} analyysi:'.format(a))
     print(v.analyze(a))
 
 print('Annetut sanat analysoitu.')

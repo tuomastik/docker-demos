@@ -1,0 +1,23 @@
+FROM debian:stretch
+# Using the official Debian image https://hub.docker.com/_/debian/
+
+LABEL maintainer="tuomas.tikkanen@hotmail.com"
+
+# Install Voikko packages 
+RUN DEBIAN_FRONTEND=noninteractive \
+	&& apt-get update \
+	&& apt-get install -y python3 \
+	&& apt-get install -y voikko-fi python-libvoikko
+
+# Create symbolic link "python" in $PATH that is expected to exist
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
+WORKDIR /usr/src/app
+
+# COPY requirements.txt ./
+# RUN pip install --no-cache-dir -r requirements.txt
+
+COPY app.py ./
+
+ENTRYPOINT ["python", "./app.py"]
+CMD ["autossa"]
